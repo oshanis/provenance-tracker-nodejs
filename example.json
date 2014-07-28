@@ -1,0 +1,4 @@
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource4","source": [], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/collections/logs
+
+curl  -X PUT -H "Content-Type: application/json" -d '{"source" : "source2", "derivatives": "deriv2"}' http://localhost:5000/collections/logs/http%3A%2F%2Fexample.com%2Fresource4
+
