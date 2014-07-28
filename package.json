@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/oshanis/provenance-tracker-nodejs",
   "dependencies": {
+    "body-parser": "^1.5.2",
     "express": "^4.7.2",
     "logfmt": "^1.1.2",
-    "mongodb": "^1.4.7"
+    "mongodb": "^1.4.7",
+    "mongoskin": "^1.4.4"
   }
 }
