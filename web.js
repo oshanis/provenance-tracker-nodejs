@@ -24,7 +24,7 @@ app.param('collectionName', function(req, res, next, collectionName){
 })
 
 app.get('/', function(req, res, next) {
-  res.send('<h3>HTTPA Provenance Tracker Gateway</h3><br> please select a collection, e.g., /collections/messages');
+  res.send('<h3>HTTPA Provenance Tracker Gateway</h3><br> Connected Nodes:');
 })
 
 
