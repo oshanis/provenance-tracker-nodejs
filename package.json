@@ -1,0 +1,23 @@
+{
+  "name": "provenance-tracker-nodejs",
+  "version": "0.0.0",
+  "description": "",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oshanis/provenance-tracker-nodejs.git"
+  },
+  "author": "Oshani Seneviratne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oshanis/provenance-tracker-nodejs/issues"
+  },
+  "homepage": "https://github.com/oshanis/provenance-tracker-nodejs",
+  "dependencies": {
+    "express": "^4.7.2",
+    "logfmt": "^1.1.2"
+  }
+}
