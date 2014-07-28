@@ -1,4 +1,62 @@
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource4","source": [], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/collections/logs
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1","temp": ["temp1", "temp2"], "source": [], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
 
-curl  -X PUT -H "Content-Type: application/json" -d '{"source" : "source2", "derivatives": "deriv2"}' http://localhost:5000/collections/logs/http%3A%2F%2Fexample.com%2Fresource4
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","source": ["http://example.com/resource1"], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
 
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","source": ["http://example.com/resource1"], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+
+
+curl  -X PUT -H "Content-Type: application/json" -d '{"identity": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
+
+
+curl -X GET http://localhost:5000/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource3
+
+
+Example Entry
+================
+
+{
+   "_id":"http://example.com/resource3",
+   "source":[
+      "http://example.com/resource1"
+   ],
+   "derivatives":[
+
+   ],
+   "meta":{
+      "owner":"http://google.com/oshani",
+      "usage_restrictions":[
+         "ur1"
+      ]
+   },
+   "activity":[
+      {
+         "name":"access",
+         "time":"2014-07-28T20:33:54.090Z",
+         "details":{
+            "owner":"Oshani",
+            "intention" : "non-commercial"
+         }
+      },
+      {
+         "name":"modify",
+         "time":"2014-07-28T20:35:37.739Z",
+         "details":{
+            "reuser":"Daniela"
+         }
+      },
+      {
+         "name":"modify",
+         "time":"2014-07-28T20:35:53.445Z",
+         "details":{
+            "reuser":"Daniela"
+         }
+      },
+      {
+         "name":"access",
+         "time":"2014-07-28T22:55:38.097Z",
+         "details":{
+            "identity":"Oshani"
+         }
+      }
+   ]
+}
