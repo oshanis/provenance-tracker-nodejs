@@ -38,24 +38,41 @@ app.get('/:collectionName', function(req, res, next) {
 app.post('/:collectionName', function(req, res, next) {
 
   console.log("Received record for: " + req.body._id);
-  //Check if the req.body has any source attributes. If so, find them and add this _id
-  //to the derivative field
-  if (req.body.source.length > 0){
-    for (var i = 0; i<req.body.source.length; i++){
-        var source = req.body.source[i];
+  
+
+  //Need to update each of the document records!
+  function updateDocuments(source){
         console.log(source);
         req.collection.findById(source, function(e, result){
             if (e) { return next(e); }
-            req.collection.updateById(source, {$push:{"derivatives" : req.body._id}}, {safe:true, multi:false}, function(e, result){
+            req.collection.updateById(source, 
+                {   $push:{"derivatives" : req.body._id}}, 
+                {safe:true, multi:true}, function(e, result){
+                if (e) return next(e)
+                console.log("source = "+ source);
+                console.log("derivative = "+ req.body._id);
+                console.log((result===1)?{msg:'added this as a derivative'}:{msg:'error'})
+                });
+            req.collection.updateById(source, 
+                { $push: {"activity" : { "name" : "share", "time": new Date(), "derivative": req.body._id, "details": req.body.meta}}}, 
+                {safe:true, multi:true}, function(e, result){
                 if (e) return next(e)
                 console.log((result===1)?{msg:'added this as a derivative'}:{msg:'error'})
                 });
         });
+
+  }
+
+  //Check if the req.body has any source attributes. If so, find them and add this _id
+  //to the derivative field
+  if (req.body.sources.length > 0){
+    for (var i = 0; i<req.body.sources.length; i++){
+        updateDocuments(req.body.sources[i]);
     }
   }
   req.collection.insert(req.body, {}, function(e, results){
     if (e) {
-        res.send("Error occured. Possibly you attempted adding a duplicate record.");
+        res.send("Error occured. Possibly you attempted adding a duplicate log record.");
         return next(e)
     }
     res.send(results)

@@ -1,14 +1,35 @@
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1","temp": ["temp1", "temp2"], "source": [], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+Localhost examples
+====================
 
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","source": ["http://example.com/resource1"], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1","sources": [], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
 
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","source": ["http://example.com/resource1"], "derivatives" : [], "meta":{"owner" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
+
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","sources": ["http://example.com/resource1", "http://example.com/resource2"], "derivatives" : [], "meta":{"user" : "http://google.com/thilanka", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
 
 
-curl  -X PUT -H "Content-Type: application/json" -d '{"identity": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
+curl  -X PUT -H "Content-Type: application/json" -d '{"user": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
 
 
 curl -X GET http://localhost:5000/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource3
+
+Herokuapp examples
+==================
+
+//Uploading an image
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1", "sources": [], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://http://provenance-tracker.herokuapp.com/logs_temp
+
+//Sharing another image using the client tool
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+
+
+curl  -X PUT -H "Content-Type: application/json" -d '{"user": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
+
+
+curl -X GET http://localhost:5000/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource3
+
 
 
 Example Entry
@@ -23,7 +44,7 @@ Example Entry
 
    ],
    "meta":{
-      "owner":"http://google.com/oshani",
+      "user":"http://google.com/oshani",
       "usage_restrictions":[
          "ur1"
       ]
@@ -33,7 +54,7 @@ Example Entry
          "name":"access",
          "time":"2014-07-28T20:33:54.090Z",
          "details":{
-            "owner":"Oshani",
+            "user":"Oshani",
             "intention" : "non-commercial"
          }
       },
@@ -41,21 +62,21 @@ Example Entry
          "name":"modify",
          "time":"2014-07-28T20:35:37.739Z",
          "details":{
-            "reuser":"Daniela"
+            "user":"Daniela"
          }
       },
       {
          "name":"modify",
          "time":"2014-07-28T20:35:53.445Z",
          "details":{
-            "reuser":"Daniela"
+            "user":"Daniela"
          }
       },
       {
          "name":"access",
          "time":"2014-07-28T22:55:38.097Z",
          "details":{
-            "identity":"Oshani"
+            "user":"Oshani"
          }
       }
    ]
