@@ -3,10 +3,12 @@ var express = require("express");
 var mongoskin = require('mongoskin');
 var bodyParser = require('body-parser');
 var logfmt = require("logfmt");
+var cors = require('cors');
 
 var app = express();
 
 app.use(bodyParser());
+app.use(cors()); //enable all CORS requests
 
 var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||

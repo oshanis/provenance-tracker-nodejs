@@ -1,39 +1,42 @@
 Localhost examples
-====================
+==================
 
+//Uploading an image
 curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1","sources": [], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
 
+//Sharing an image using the client tool
 curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
 
+//Sharing an image with two usage restrictions
 curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","sources": ["http://example.com/resource1", "http://example.com/resource2"], "derivatives" : [], "meta":{"user" : "http://google.com/thilanka", "usage_restrictions": ["non-commercial"]}}' http://localhost:5000/logs_temp
 
+//Specifying an action on the resource, i.e. access, modify, download (share is a special case and should be handled with the one above)
+curl  -X PUT -H "Content-Type: application/json" -d '{"user": "http://google.com/Oshani"}' http://localhost:5000/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
 
-curl  -X PUT -H "Content-Type: application/json" -d '{"user": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
-
-
+//How to request the audit log
 curl -X GET http://localhost:5000/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource3
 
 Herokuapp examples
 ==================
 
 //Uploading an image
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1", "sources": [], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://http://provenance-tracker.herokuapp.com/logs_temp
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource1","sources": [], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://provenance-tracker.herokuapp.com/logs_temp
 
-//Sharing another image using the client tool
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+//Sharing an image using the client tool
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource2","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["non-commercial"]}}' http://provenance-tracker.herokuapp.com/logs_temp
 
-curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","sources": ["http://example.com/resource1"], "derivatives" : [], "meta":{"user" : "http://google.com/oshani", "usage_restrictions": ["ur1"]}}' http://localhost:5000/logs_temp
+//Sharing an image with two usage restrictions
+curl  -X POST -H "Content-Type: application/json" -d '{"_id":"http://example.com/resource3","sources": ["http://example.com/resource1", "http://example.com/resource2"], "derivatives" : [], "meta":{"user" : "http://google.com/thilanka", "usage_restrictions": ["non-commercial"]}}' http://provenance-tracker.herokuapp.com/logs_temp
 
+//Specifying an action on the resource, i.e. access, modify, download (share is a special case and should be handled with the one above)
+curl  -X PUT -H "Content-Type: application/json" -d '{"user": "http://google.com/Oshani"}' http://provenance-tracker.herokuapp.com/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource1
 
-curl  -X PUT -H "Content-Type: application/json" -d '{"user": "Oshani"}' http://localhost:5000/collections/logs_temp/access/http%3A%2F%2Fexample.com%2Fresource3
-
-
-curl -X GET http://localhost:5000/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource3
-
+//How to request the audit log
+curl -X GET http://provenance-tracker.herokuapp.com/logs_temp/audit/http%3A%2F%2Fexample.com%2Fresource1
 
 
 Example Entry
-================
+==============
 
 {
    "_id":"http://example.com/resource3",

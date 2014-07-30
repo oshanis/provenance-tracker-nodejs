@@ -11,3 +11,8 @@ cd /usr/local/mongodb
 > db.logs_temp.drop()
 
 More information here: http://alvinalexander.com/source-code/scala/mongodb-drop-collection-examples-using-mongo
+
+
+Enabling CORS
+==============
+used the 'cors' package. More info here: https://www.npmjs.org/package/cors
