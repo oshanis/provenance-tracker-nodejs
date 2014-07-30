@@ -130,7 +130,7 @@ app.get('/:collectionName/audit/:id', function(req, res, next){
             res.send(result.activity);        
         }
         else {
-            res.send("not found");
+            res.send("Audit log record for resource "+ req.params['id'] +" not found.");
         }
 
   })
