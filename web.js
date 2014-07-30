@@ -114,7 +114,7 @@ app.get('/:collectionName/audit/:id', function(req, res, next){
     req.collection.findById(req.params.id, function(e, result){
         if (e) return next(e)
 
-        if (result.activity != undefined){
+        if (result != null && result.activity != undefined){
             result.activity.sort(
                 function (a,b) {
                   if (a != null && b != null){
